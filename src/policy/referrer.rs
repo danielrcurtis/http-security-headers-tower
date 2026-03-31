@@ -51,9 +51,12 @@ impl ReferrerPolicy {
             Self::UnsafeUrl => "unsafe-url",
         }
     }
+}
 
-    /// Parses a Referrer-Policy value from a string.
-    pub fn from_str(s: &str) -> Result<Self> {
+impl std::str::FromStr for ReferrerPolicy {
+    type Err = Error;
+
+    fn from_str(s: &str) -> Result<Self> {
         match s.to_lowercase().as_str() {
             "no-referrer" => Ok(Self::NoReferrer),
             "no-referrer-when-downgrade" => Ok(Self::NoReferrerWhenDowngrade),
@@ -80,6 +83,7 @@ impl std::fmt::Display for ReferrerPolicy {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::str::FromStr;
 
     #[test]
     fn test_as_str() {

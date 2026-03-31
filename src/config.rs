@@ -266,6 +266,10 @@ impl SecurityHeadersBuilder {
             csp.to_header_value()?;
         }
 
+        if let Some(hsts) = &self.strict_transport_security {
+            hsts.to_header_value()?;
+        }
+
         // Validate that at least one header is configured
         if self.content_security_policy.is_none()
             && self.strict_transport_security.is_none()

@@ -40,9 +40,12 @@ impl CrossOriginOpenerPolicy {
             Self::UnsafeNone => "unsafe-none",
         }
     }
+}
 
-    /// Parses a COOP value from a string.
-    pub fn from_str(s: &str) -> Result<Self> {
+impl std::str::FromStr for CrossOriginOpenerPolicy {
+    type Err = Error;
+
+    fn from_str(s: &str) -> Result<Self> {
         match s.to_lowercase().as_str() {
             "same-origin" => Ok(Self::SameOrigin),
             "same-origin-allow-popups" => Ok(Self::SameOriginAllowPopups),
@@ -96,9 +99,12 @@ impl CrossOriginEmbedderPolicy {
             Self::Credentialless => "credentialless",
         }
     }
+}
 
-    /// Parses a COEP value from a string.
-    pub fn from_str(s: &str) -> Result<Self> {
+impl std::str::FromStr for CrossOriginEmbedderPolicy {
+    type Err = Error;
+
+    fn from_str(s: &str) -> Result<Self> {
         match s.to_lowercase().as_str() {
             "unsafe-none" => Ok(Self::UnsafeNone),
             "require-corp" => Ok(Self::RequireCorp),
@@ -149,9 +155,12 @@ impl CrossOriginResourcePolicy {
             Self::CrossOrigin => "cross-origin",
         }
     }
+}
 
-    /// Parses a CORP value from a string.
-    pub fn from_str(s: &str) -> Result<Self> {
+impl std::str::FromStr for CrossOriginResourcePolicy {
+    type Err = Error;
+
+    fn from_str(s: &str) -> Result<Self> {
         match s.to_lowercase().as_str() {
             "same-origin" => Ok(Self::SameOrigin),
             "same-site" => Ok(Self::SameSite),
@@ -173,6 +182,7 @@ impl std::fmt::Display for CrossOriginResourcePolicy {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::str::FromStr;
 
     // COOP tests
     #[test]

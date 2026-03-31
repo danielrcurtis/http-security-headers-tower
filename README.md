@@ -32,15 +32,25 @@ Type-safe, framework-agnostic HTTP security headers for Rust with Tower and Acti
 
 Add to your `Cargo.toml`:
 
+Core only:
+
 ```toml
 [dependencies]
-http-security-headers = "0.1"
+http-security-headers = "0.2"
+```
 
-# For middleware support
-http-security-headers = { version = "0.1", features = ["middleware"] }
+With Tower/Axum middleware:
 
-# For Actix-Web integration
-http-security-headers = { version = "0.1", features = ["actix"] }
+```toml
+[dependencies]
+http-security-headers = { version = "0.2", features = ["middleware"] }
+```
+
+With Actix-Web integration:
+
+```toml
+[dependencies]
+http-security-headers = { version = "0.2", features = ["actix"] }
 ```
 
 ## Quick Start
