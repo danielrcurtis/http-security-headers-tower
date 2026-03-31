@@ -32,9 +32,12 @@ impl XFrameOptions {
             Self::SameOrigin => "SAMEORIGIN",
         }
     }
+}
 
-    /// Parses an X-Frame-Options value from a string.
-    pub fn from_str(s: &str) -> Result<Self> {
+impl std::str::FromStr for XFrameOptions {
+    type Err = Error;
+
+    fn from_str(s: &str) -> Result<Self> {
         match s.to_uppercase().as_str() {
             "DENY" => Ok(Self::Deny),
             "SAMEORIGIN" => Ok(Self::SameOrigin),
@@ -55,6 +58,7 @@ impl std::fmt::Display for XFrameOptions {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::str::FromStr;
 
     #[test]
     fn test_as_str() {

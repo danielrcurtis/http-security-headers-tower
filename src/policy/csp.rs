@@ -211,8 +211,11 @@ impl ContentSecurityPolicy {
         }
 
         let mut parts = Vec::new();
+        let mut keys: Vec<&String> = self.directives.keys().collect();
+        keys.sort();
 
-        for (directive, sources) in &self.directives {
+        for directive in keys {
+            let sources = &self.directives[directive];
             if sources.is_empty() {
                 // Valueless directives (upgrade-insecure-requests, block-all-mixed-content)
                 parts.push(directive.clone());
